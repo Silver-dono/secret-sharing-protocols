@@ -11,7 +11,7 @@ class Part:
     privateKey = -1 # sk
 
     # Plain polynom
-    polynom = poly()
+    polynom = poly
 
     shares = []
     cypheredShares = []
