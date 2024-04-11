@@ -1,5 +1,5 @@
 
-class ledger:
+class Ledger:
 
     # Defining global variable for the ledger
     nParticipants = -1  # n
@@ -29,3 +29,10 @@ class ledger:
                 for i in range(len(self.publicKeys)-1, ordinal-1):
                     self.publicKeys.append(None)
                 self.publicKeys.append(pk)
+
+
+    def getT(self):
+        return self.tolerance
+
+    def getL(self):
+        return self.l            
