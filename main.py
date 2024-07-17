@@ -1,13 +1,28 @@
-import utils
-import ledger
-import parts
-# TODO: Instantiate participants and ledger and simulate an use of the protocol
-n, q = 9, 11
-h = utils.findGenerator(q)
+import subprocess
+import threading
+from time import sleep
 
-auxLedger = ledger.Ledger(n, q, h)
-t, l = auxLedger.getT(), auxLedger.getL()
+def runParticipant(port):
+    command = "python -m flask --app participant:create_app(" + str(i) + ") run -p " + str(port)
+    subprocess.run(command)
 
-part1 = parts.Part(1, t, l, n, q, h)
+def runLedger(port, n, q):
+    command = "python -m flask --app ledger:create_app(" + str(n) + "," + str(q) + ") run -p " + str(port)
+    subprocess.run(command)    
 
-print(part1.publicKey, part1.polynom, part1.ldei)
+
+# Main script to load all participants and the ledger for the simulation
+n, q = 5, 523
+
+# Load participants
+for i in range(n):
+    port = 5000 + i
+    thread = threading.Thread(target=runParticipant, args=(port,))
+    thread.start()
+
+
+sleep(1)
+
+#Load public ledger
+thread = threading.Thread(target=runLedger, args=(6000,n,q,))
+thread.start()
