@@ -26,7 +26,6 @@ def findGenerator(q : int):
     return -1 # Return -1 if no generator found
 
 # Generate random polynom inside cyclic group of order q
-# TODO: Asegurar si el polinomio se "cifra" con el generador antes de computarlo y generar las partes de πPPVSS (fichas.pdf, pag 7)
 def generatePolynom(t : int, l : int, q : int): 
     coefs = [randint(0, q) for _ in range(int(t + l))]
     poly = Poly(coefs, X)
@@ -38,8 +37,6 @@ def generatePolynom(t : int, l : int, q : int):
 def computePolynom(poly, pk, l:int, n, q, h):
 
     #Implementacion de πPPVSS del documento (fichas.pdf, pag. 15) 
-
-    # Check https://docs.sympy.org/latest/modules/polys/internals.html#manipulation-of-dense-univariate-polynomials-with-finite-field-coefficients
 
     secrets = [-1] * int(l)
     encryptedSecrets = [-1] * int(l)
